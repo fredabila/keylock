@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riddle Challenge</title>
+</head>
+<body>
+
+    <h1>Welcome to the Riddle Challenge</h1>
+
+    <div id="riddleContainer">
+        <p id="riddle"></p>
+        <form id="riddleForm">
+            <label for="answer">Your Answer:</label>
+            <input type="text" id="answer" required>
+            <button type="button" onclick="checkAnswer()">Submit</button>
+        </form>
+    </div>
+
+    <div id="result" style="display: none;">
+        <p id="success">Congratulations! Here is your Mega file decryption key: <strong>BY8p1uXx-Xt02KNnDCmojgqE6hRCjlFVPie2Zvi0_2c</strong></p>
+        <p id="failure" style="color: red;">Sorry, the answer is incorrect. Please try again.</p>
+    </div>
+
+    <script>
+        var riddles = [
+            "I speak without a mouth and hear without ears. I have no body, but I come alive with the wind. What am I?",
+            "The more you take, the more you leave behind. What am I?",
+            "I am taken from a mine, and shut up in a wooden case, from which I am never released, and yet I am used by almost every person. What am I?"
+        ];
+
+        function getRandomRiddle() {
+            var randomIndex = Math.floor(Math.random() * riddles.length);
+            return riddles[randomIndex];
+        }
+
+        function initialize() {
+            document.getElementById('riddle').innerText = getRandomRiddle();
+        }
+
+        function checkAnswer() {
+            var userAnswer = document.getElementById('answer').value.toLowerCase();
+            var correctAnswer = "key"; // Adjust this to the actual correct answer for the riddle
+
+            if (userAnswer === correctAnswer) {
+                document.getElementById('result').style.display = 'block';
+                document.getElementById('success').style.display = 'block';
+                document.getElementById('failure').style.display = 'none';
+            } else {
+                document.getElementById('result').style.display = 'block';
+                document.getElementById('success').style.display = 'none';
+                document.getElementById('failure').style.display = 'block';
+            }
+
+            // Get a new riddle for the next attempt
+            document.getElementById('riddle').innerText = getRandomRiddle();
+            document.getElementById('answer').value = '';
+        }
+
+        // Initialize the page with a random riddle
+        initialize();
+    </script>
+
+</body>
+</html>
